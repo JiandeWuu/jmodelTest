@@ -1,4 +1,4 @@
-from .np import *
+from ..np import *
 
 class Sigmoid:
     def __init__(self):
@@ -35,3 +35,4 @@ class Affine:
         self.grads[0][...] = dW
         self.grads[1][...] = db
         return dx
+        

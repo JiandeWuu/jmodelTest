@@ -1,6 +1,6 @@
 from typing import List, Union, Dict
 
-from .np import np
+from ..np import np
 # class MinMaxScalerError(Exception):
     
 class Feature():
