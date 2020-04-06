@@ -33,12 +33,11 @@ from jmodel.np import *
 #     return x, y, unique
 
 
-vocab_file = 'ptb.vocab.pkl'
 
 dataset_dir = os.path.dirname(os.path.abspath(__file__))
 
-def load_vocab():
-    vocab_path = dataset_dir + '/' + vocab_file
+def load_vocab(file_path):
+    vocab_path = os.path.splitext(file_path)[0] + ".pkl"
 
     if os.path.exists(vocab_path):
         with open(vocab_path, 'rb') as f:
@@ -47,11 +46,6 @@ def load_vocab():
 
     word_to_id = {}
     id_to_word = {}
-    data_type = 'train'
-    file_name = key_file[data_type]
-    file_path = dataset_dir + '/' + file_name
-
-    _download(file_name)
 
     words = open(file_path).read().replace('\n', '<eos>').strip().split()
 
@@ -67,26 +61,18 @@ def load_vocab():
     return word_to_id, id_to_word
 
 
-def load_data(file_path):
+def load_data(file_name):
     
-    save_path = dataset_dir + '/' + save_file[data_type]
-    print(save_path)
-    quit()
-    word_to_id, id_to_word = load_vocab()
+    file_path = dataset_dir + '/' + file_name
+    word_to_id, id_to_word = load_vocab(file_path)
 
+    save_path = os.path.splitext(file_path)[0] + ".npy"
     if os.path.exists(save_path):
         corpus = np.load(save_path)
         return corpus, word_to_id, id_to_word
 
-    file_name = key_file[data_type]
-    file_path = dataset_dir + '/' + file_name
-    _download(file_name)
-
     words = open(file_path).read().replace('\n', '<eos>').strip().split()
-    # words = words[:50]
-    # print(words)
-    # for w in words:
-    #     print(w + "," + str(word_to_id[w]))
+
     corpus = np.array([word_to_id[w] for w in words])
     np.save(save_path, corpus)
     return corpus, word_to_id, id_to_word
