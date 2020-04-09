@@ -1,5 +1,5 @@
-from jmodel.np import *
-from TimeLayer import *
+from ..np import *
+from ..Layers.TimeLayer import *
 class SimpleRnnlm:
     def __init__(self, vocab_size, wordvec_size, hidden_size):
         V, D, H = vocab_size, wordvec_size, hidden_size
@@ -29,7 +29,7 @@ class SimpleRnnlm:
             self.grads += layer.grads
         
     def forward(self, xs, ts):
-        for layer in selflayers:
+        for layer in self.layers:
             xs = layer.forward(xs)
         loss = self.loss_layer.forward(xs, ts)
         return loss
