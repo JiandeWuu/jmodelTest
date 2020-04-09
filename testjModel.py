@@ -1,4 +1,6 @@
 from LoadData import load_data
+
+from jmodel.util import *
 from jmodel.Optimizers.BiascOptimizer import *
 from jmodel.Models.Rnnlm import *
 from jmodel.Trainers.RnnTrainer import *
@@ -8,7 +10,7 @@ wordvec_size = 100
 hidden_size = 100  # RNN隱藏狀態向量的元素數
 time_size = 35  # 展開RNN的大小
 lr = 20.0
-max_epoch = 4
+max_epoch = 50
 max_grad = 0.25
 
 # 載入學習資料

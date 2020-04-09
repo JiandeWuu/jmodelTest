@@ -1,4 +1,6 @@
 import time
+import numpy
+import matplotlib.pyplot as plt
 
 from ..np import *
 from ..util import *
@@ -27,8 +29,7 @@ class RnnlmTrainer:
             self.time_idx += 1
         return batch_x, batch_t
 
-    def fit(self, xs, ts, max_epoch=10, batch_size=20, time_size=35,
-            max_grad=None, eval_interval=20):
+    def fit(self, xs, ts, max_epoch=10, batch_size=20, time_size=35, max_grad=None, eval_interval=20):
         data_size = len(xs)
         max_iters = data_size // (batch_size * time_size)
         self.time_idx = 0
