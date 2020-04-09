@@ -50,10 +50,10 @@ class Rnnlm:
     def reset_state(self):
         self.lstm_layer.reset_state()
 
-    def save_params(self, file_name = 'Rnnlm.pkl'):
+    def save_params(self, file_name = 'params\Rnnlm.pkl'):
         with open(file_name, 'wb') as f:
             pickle.dump(self.params, f)
     
-    def load_params(self, file_name = 'Rnnlm.pkl'):
+    def load_params(self, file_name = 'params\Rnnlm.pkl'):
         with open(file_name, 'rb') as f:
             self.params = pickle.load(f)

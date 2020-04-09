@@ -56,6 +56,6 @@ class OneHotEncoding():
         
         if self.unique is None:
             self.unique = np.unique(y)
+
         y = np.array([[1 if row == onehot else 0 for onehot in self.unique] for row in y])
         return x, y
-

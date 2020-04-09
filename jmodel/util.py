@@ -42,3 +42,16 @@ def eval_perplexity(model, corpus, batch_size=10, time_size=35):
     print('')
     ppl = np.exp(total_loss / max_iters)
     return ppl
+
+def to_cpu(x):
+    import numpy
+    if type(x) == numpy.ndarray:
+        return x
+    return np.asnumpy(x)
+
+
+def to_gpu(x):
+    import cupy
+    if type(x) == cupy.ndarray:
+        return x
+    return cupy.asarray(x)

@@ -3,11 +3,13 @@ import random
 import pickle
 import datetime
 
-from .np import *
-from .Optimizer import SGD
-from .Feature import Feature
-from .Function import softmax
-
+from ..np import *
+from ..util import *
+from ..Function import * 
+from ..Layers.LossLayers import *
+from ..Layers.BiascLayers import *
+from ..Feature.BiascFeature import *
+from ..Optimizers.BiascOptimizer import *
 
 class Trainer():
     def __init__(self, model, out_to_value = None):
@@ -17,6 +19,7 @@ class Trainer():
 
     def fit(self, x, t, max_epoch = 10, batch_size = 32, learning_rate = 1):
         x, t = self.feature.run(x, t)
+        
         optimizer = SGD(lr = learning_rate)
 
         model = self.model
@@ -36,6 +39,6 @@ class Trainer():
             return self.out_to_value[t]
         return t
     
-    def save(self):
-        with open('params/trainer_'+str(datetime.datetime.now())+'.pickle', 'wb') as f:
+    def save(self, file_name = 'NetTrainer.pickle'):
+        with open('params/' + file_name, 'wb') as f:
             pickle.dump(self, f)
