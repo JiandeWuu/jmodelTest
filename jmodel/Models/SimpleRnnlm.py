@@ -1,3 +1,5 @@
+import pickle
+
 from ..np import *
 from ..Layers.TimeLayer import *
 class SimpleRnnlm:
@@ -42,3 +44,11 @@ class SimpleRnnlm:
     
     def reset_state(self):
         self.rnn_layer.reset_state()
+    
+    def save_params(self, file_name = 'params/SimpleRnnlm.pkl'):
+        with open(file_name, 'wb') as f:
+            pickle.dump(self.params, f)
+    
+    def load_params(self, file_name = 'params/SimpleRnnlm.pkl'):
+        with open(file_name, 'rb') as f:
+            self.params = pickle.load(f)

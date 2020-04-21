@@ -10,13 +10,13 @@ wordvec_size = 100
 hidden_size = 100  # RNN隱藏狀態向量的元素數
 time_size = 35  # 展開RNN的大小
 lr = 20.0
-max_epoch = 50
+max_epoch = 100
 max_grad = 0.25
 
 # 載入學習資料
 corpus, word_to_id, id_to_word = load_data("lotr.txt")
-corpus_test = corpus[len(corpus)/5*4:]
-corpus = corpus[:len(corpus)/5*4]
+corpus_test = corpus[len(corpus)//5*4:]
+corpus = corpus[:len(corpus)//5*4]
 vocab_size = len(word_to_id)
 xs = corpus[:-1]
 ts = corpus[1:]

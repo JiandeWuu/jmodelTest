@@ -1,5 +1,6 @@
 import time
 import numpy
+import pickle
 import matplotlib.pyplot as plt
 
 from ..np import *
