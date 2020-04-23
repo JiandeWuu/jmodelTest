@@ -17,9 +17,9 @@ max_epoch = 100
 
 # 載入學習資料
 # 載入學習資料
-corpus, word_to_id, id_to_word = load_data("lotr.txt")
-corpus_test = corpus[len(corpus)//5*4:]
-corpus = corpus[:len(corpus)//5*4]
+corpus, word_to_id, id_to_word = load_data("ptb.train.txt")
+# corpus_test = corpus[len(corpus)//5*4:]
+# corpus = corpus[:len(corpus)//5*4]
 vocab_size = len(word_to_id)
 xs = corpus[:-1]
 ts = corpus[1:]

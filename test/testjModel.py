@@ -14,9 +14,8 @@ max_epoch = 100
 max_grad = 0.25
 
 # 載入學習資料
-corpus, word_to_id, id_to_word = load_data("lotr.txt")
-corpus_test = corpus[len(corpus)//5*4:]
-corpus = corpus[:len(corpus)//5*4]
+corpus, word_to_id, id_to_word = load_data("ptb.train.txt")
+
 vocab_size = len(word_to_id)
 xs = corpus[:-1]
 ts = corpus[1:]
@@ -33,6 +32,8 @@ trainer.plot(ylim=(0, 500))
 
 # 用測試資料評估
 model.reset_state()
+corpus_test, word_to_id, id_to_word = load_data("ptb.test.txt")
+
 ppl_test = eval_perplexity(model, corpus_test)
 print('test perplexity: ', ppl_test)
 
