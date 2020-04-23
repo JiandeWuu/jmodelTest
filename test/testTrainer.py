@@ -14,12 +14,6 @@ lr_array = [0.1, 1, 10, 20.0]
 max_epoch = 1
 max_grad = 0.25
 
-batch_size_array = [32]
-wordvec_size_array = [32]
-hidden_size_array = [32]  # RNN隱藏狀態向量的元素數
-time_size_array = [32]  # 展開RNN的大小
-lr_array = [10]
-
 # 載入學習資料
 corpus, word_to_id, id_to_word = load_data("ptb.train.txt")
 vocab_size = len(word_to_id)
