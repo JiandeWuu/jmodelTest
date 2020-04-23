@@ -13,7 +13,7 @@ wordvec_size = 100
 hidden_size = 100  # RNN的隱藏狀態向量的元素數
 time_size = 5  # 展開RNN的大小
 lr = 0.1
-max_epoch = 1
+max_epoch = 100
 
 # 載入學習資料
 # 載入學習資料
