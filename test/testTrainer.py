@@ -41,6 +41,7 @@ try:
                     if best_ppl is None or ppl < best_ppl:
                         best_ppl = ppl
                         best_model = model
+                        model.save_params("params/Rnnlm_b.pkl")
 
 except :
     with open('params/stop.pickle', 'wb') as f:
