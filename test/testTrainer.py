@@ -6,11 +6,11 @@ from jmodel.Models.Rnnlm import *
 from jmodel.Trainers.RnnTrainer import *
 
 # 設定超參數
-batch_size_array = [16, 32, 64, 128]
-wordvec_size_array = [32, 128, 256, 512]
+batch_size_array = [32]
+wordvec_size_array = [128]
 hidden_size_array = [32, 128, 256, 512]  # RNN隱藏狀態向量的元素數
 time_size_array = [8, 16, 32, 64]  # 展開RNN的大小
-lr_array = [0.1, 1, 10, 20.0]
+lr_array = [10]
 max_epoch = 100
 max_grad = 0.25
 
@@ -22,6 +22,7 @@ ts = corpus[1:]
 
 best_model = None
 best_ppl = None
+best_size = None
 try:
     for batch_size in batch_size_array:
         for wordvec_size in wordvec_size_array:
@@ -41,7 +42,8 @@ try:
                     if best_ppl is None or ppl < best_ppl:
                         best_ppl = ppl
                         best_model = model
-                        model.save_params("params/Rnnlm_b.pkl")
+                        best_size = [batch_size, wordvec_size, time_size, lr]
+                        model.save_params("params/Rnnlm_c.pkl")
 
 except :
     with open('params/stop.pickle', 'wb') as f:
