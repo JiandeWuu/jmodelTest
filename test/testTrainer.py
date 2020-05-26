@@ -9,7 +9,7 @@ from jmodel.Trainers.RnnTrainer import *
 batch_size_array = [32]
 wordvec_size_array = [128]
 hidden_size_array = [32, 128, 256, 512]  # RNN隱藏狀態向量的元素數
-time_size_array = [8, 16, 32, 64]  # 展開RNN的大小
+time_size_array = [32]  # 展開RNN的大小
 lr_array = [10]
 max_epoch = 100
 max_grad = 0.25

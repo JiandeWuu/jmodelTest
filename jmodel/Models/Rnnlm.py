@@ -1,6 +1,7 @@
 import pickle
 
 from ..np import *
+from ..util import *
 from ..Layers.TimeLayer import *
 from ..Function import*
 class Rnnlm:
@@ -51,9 +52,27 @@ class Rnnlm:
         self.lstm_layer.reset_state()
 
     def save_params(self, file_name = 'params/Rnnlm.pkl'):
+        params = [p.astype(np.float16) for p in self.params]
+        if GPU:
+            params = [to_cpu(p) for p in params]
+
         with open(file_name, 'wb') as f:
-            pickle.dump(self.params, f)
+            pickle.dump(params, f)
     
     def load_params(self, file_name = 'params/Rnnlm.pkl'):
         with open(file_name, 'rb') as f:
-            self.params = pickle.load(f)
+            params = pickle.load(f)
+
+        params = [p.astype('f') for p in params]
+        if GPU:
+            params = [to_gpu(p) for p in params]
+
+        for i, param in enumerate(self.params):
+            param[...] = params[i]
+    
+    def predict_y(self, xs):
+        for layer in self.layers:
+            xs = layer.forward(xs)
+        ys = softmax(xs)
+        ts = np.argmax(ys, axis=2)
+        return ts

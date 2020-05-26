@@ -13,13 +13,13 @@ wordvec_size = 100
 hidden_size = 100  # RNN的隱藏狀態向量的元素數
 time_size = 5  # 展開RNN的大小
 lr = 0.1
-max_epoch = 100
+max_epoch = 4
 
 # 載入學習資料
 # 載入學習資料
 corpus, word_to_id, id_to_word = load_data("ptb.train.txt")
 # corpus_test = corpus[len(corpus)//5*4:]
-# corpus = corpus[:len(corpus)//5*4]
+corpus = corpus[:50000]
 vocab_size = len(word_to_id)
 xs = corpus[:-1]
 ts = corpus[1:]

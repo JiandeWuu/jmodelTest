@@ -1,4 +1,5 @@
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 from LoadData import *
 
@@ -26,7 +27,7 @@ for batch_size in batch_size_array:
     for max_epoch in max_epoch_array:
         for hidden_size in hidden_size_array:
             model = ThreeLayerNet(input_size=X_train.shape[1], hidden_size=hidden_size, output_size=len(out_to_value)) #, params=params)
-            nn = Trainer(model, out_to_value)
+            nn = Trainer(model, )
             nn.fit(X_train, Y_train, max_epoch = max_epoch, batch_size = batch_size)
             loss = nn.loss(X_train, Y_train)
             if best_loss is None or best_loss > loss:
@@ -34,9 +35,10 @@ for batch_size in batch_size_array:
                 best_batch_size = batch_size
                 best_max_epoch = max_epoch
                 best_hidden_size = hidden_size
-
-                nn.save()
+                # nn.save()
 print('| batch_size %d | max_epoch %d | hidden_size %d | loss %.5f' % (best_batch_size, best_max_epoch, best_hidden_size, best_loss))
 
+y_pred = nn.predict(X_test)
+print(accuracy_score(Y_test, y_pred))
 # 儲存參數
 # model.save_params()

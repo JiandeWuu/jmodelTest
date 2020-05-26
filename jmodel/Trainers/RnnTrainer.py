@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 from ..np import *
 from ..util import *
+from ..Function import *
 
 class RnnlmTrainer:
     def __init__(self, model, optimizer):
@@ -55,10 +56,26 @@ class RnnlmTrainer:
                 loss_count += 1
 
                 # 評估困惑度
+                # if (eval_interval is not None) and (iters % eval_interval) == 0:
+                #     ppl = np.exp(total_loss / loss_count)
+                #     elapsed_time = time.time() - start_time
+                #     print('| epoch %d |  iter %d / %d | time %d[s] | accuracy %.2f'
+                #           % (self.current_epoch + 1, iters + 1, max_iters, elapsed_time, ppl))
+                #     self.ppl_list.append(float(ppl))
+                #     total_loss, loss_count = 0, 0
+
                 if (eval_interval is not None) and (iters % eval_interval) == 0:
-                    ppl = np.exp(total_loss / loss_count)
+                    tt = np.array(model.predict_y(batch_x))
+                    # print(tt)
+                    # print(tt.shape)
+                    # print(batch_t)
+                    # print(batch_t.shape)
+                    # print(accuracy(tt, batch_t))
+                    # quit()
+                    ppl = accuracy(tt, batch_t)
+                    
                     elapsed_time = time.time() - start_time
-                    print('| epoch %d |  iter %d / %d | time %d[s] | perplexity %.2f'
+                    print('| epoch %d |  iter %d / %d | time %d[s] | accuracy %.2f'
                           % (self.current_epoch + 1, iters + 1, max_iters, elapsed_time, ppl))
                     self.ppl_list.append(float(ppl))
                     total_loss, loss_count = 0, 0
